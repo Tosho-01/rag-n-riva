@@ -1,80 +1,86 @@
 # Local LLM with RAG and Speech Functionality on NVIDIA Jetson Orin
 
-This repository contains all the necessary steps to set up a local language model (LLM) with Retrieval-Augmented Generation (RAG) and speech functionality on an NVIDIA Jetson Orin. The project has been developed as part of a university project by Theodor Stetter at the [RPTU](https://www.rptu.de/).
+This repository contains all the necessary steps to set up a local language model (LLM) with Retrieval-Augmented Generation (RAG) and speech functionality on an NVIDIA Jetson AGX Orin. The project has been developed as part of a university project by Theodor Stetter at the [RPTU](https://www.rptu.de/).
 
 The project uses three main components:
-1. The **Ollama** container from the [Jetson Containers project](https://github.com/dusty-nv/jetson-containers)
-2. **NVIDIA Riva** for speech-to-text (ASR) and text-to-speech (TTS) capabilities
-3. A custom **Python script** that brings everything together
+1. The [**Ollama**](https://ollama.com/) container from the [Jetson Containers project](https://github.com/dusty-nv/jetson-containers) to run the LLM
+2. [**NVIDIA Riva**](https://developer.nvidia.com/riva) for speech-to-text (ASR) and text-to-speech (TTS) capabilities
+3. A custom **Python script** that runs the RAG, ASR, TTS and coordinates the user input and the corresponding outputs
 
 ## Requirements
-- **NVIDIA Jetson Orin** with JetPack installed
-- **Docker** and **NVIDIA Container Toolkit** (Jetson already supports Docker-based environments)
+- [NVIDIA Jetson AGX Orin](https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-orin/) with JetPack [installed](https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit)
 - Internet connection to pull necessary models
 
 ## Project Setup
 
 ### 1. Ollama Container Setup
 
-The Ollama container is provided by the [Jetson Containers project](https://github.com/dusty-nv/jetson-containers). Follow these steps to install and configure it:
+The [Ollama container](https://github.com/dusty-nv/jetson-containers/tree/master/packages/llm/ollama) is part of the Jetson Containers project by [Dustin Franklin](https://developer.nvidia.com/blog/author/dfranklin/). Follow these steps for the necessary adjustments on your Jetson device, and the installation of the Jetson Containers project.
 
-#### a) System Setup
+#### a) Prerequisites
 
-Run the following commands to install the necessary components for Jetson containers:
+1. Follow the [System Setup](https://github.com/dusty-nv/jetson-containers/blob/master/docs/setup.md).
+2. Clone the github repository and install the corresponding bash script.
 
 ```bash
 git clone https://github.com/dusty-nv/jetson-containers
 bash jetson-containers/install.sh
 ```
 
-Refer to the Jetson Containers setup documentation for more detailed instructions if needed.
+Refer to the Jetson Containers documentation for more detailed instructions if needed.
 #### b) Starting the Ollama Container
 
 Once the system setup is complete, run the following command to start the Ollama container:
 
 ```bash
-jetson-containers run --name ollama -v /mnt/ownFiles:/ownFiles $(autotag ollama)
+jetson-containers run --name ollama $(autotag ollama)
 ```
-
-This command starts the Ollama container, mounting /mnt/ownFiles from your local file system into the container.
 
 #### c) Pull Required Models
 
-After starting the container, you'll need to pull the necessary models (e.g., LLaMA 3 and Nomic Embed Text). Use the following commands inside the container:
+After starting the container, you'll need to pull the necessary models (e.g., LLaMA 3 and Nomic Embed Text). Use the following commands in a new shell:
 
 ```bash
 ollama pull llama3
 ollama pull nomic-embed-text
 ```
 
-    Note: Ensure you have enough disk space available on your device, as these models can be quite large.
+Note: Ensure you have enough disk space available on your device, as these models can be quite large.
 
 ### 2. NVIDIA Riva Installation
 
-NVIDIA Riva provides speech services like Automatic Speech Recognition (ASR) and Text-to-Speech (TTS). Follow the NVIDIA Riva Quickstart Guide for installation on an ARM64 platform.
-#### a) Starting Riva
+NVIDIA Riva provides speech services like Automatic Speech Recognition (ASR) and Text-to-Speech (TTS). 
 
-After setting up Riva, navigate to the Riva Quickstart directory and run the following commands to start the Riva services:
+#### a) Prerequisites
+
+1. Follow the [NVIDIA Riva Quickstart Guide](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/riva/resources/riva_quickstart_arm64) for installation on an ARM64 platform.
+2. You can go through the [tutorials](https://github.com/nvidia-riva/python-clients#asr) to check for successful installation and operation of NVIDIA Riva
+
+#### b) Starting Riva
+
+After setting up Riva, navigate to the Riva Quickstart directory and run the shell script to start the Riva services. In the case of v2.16.0 this looks like this:
 
 ```bash
 
-cd /mnt/riva_quickstart_arm64_v2.15.1
+cd /mnt/riva_quickstart_arm64_v2.16.0
 bash riva_start.sh
 ```
-    Note: Ensure the Riva directory is mounted to your /mnt directory or the appropriate location where you've installed it. If the Riva version changes, update the path accordingly.
+Note: Ensure that the correct path to your Riva directory is selected. If the Riva version changes, update the path accordingly.
 
 ### 3. Running the Python Script
 
 The final step is running the Python script that integrates the Ollama and NVIDIA Riva services.
 #### a) Installing Dependencies
+It is recommended to use a virtual environment to install the packages and run the python script.
 
-First, install the necessary Python packages by running:
+1. Setup the virtual environment
+2. Install the necessary Python packages by running:
 ```
 bash
 
-pip install -r requirements2.txt
+pip install -r requirements.txt
 ```
-       Note: Ensure you are in the correct directory that contains the requirements2.txt file.
+Note: Ensure you are in the correct directory that contains the requirements.txt file.
 
 #### b) Running the Script
 
