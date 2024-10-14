@@ -7,6 +7,20 @@ The project uses three main components:
 2. [**NVIDIA Riva**](https://developer.nvidia.com/riva) for speech-to-text (ASR) and text-to-speech (TTS) capabilities
 3. A custom **Python script** that runs the RAG, ASR, TTS and coordinates the user input and the corresponding outputs
 
+## Table of Contents
+1. [Requirements](#requirements)
+2. [Project Setup](#project-setup)
+   
+   2.1 [Ollama Container Setup](#1-ollama-container-setup)
+   
+   2.2 [NVIDIA Riva Installation](#2-nvidia-riva-installation)
+
+   2.3 [Running the Python Script](#3-running-the-python-script)
+
+3. [Start, Restart, and Stop the Program Using Shell Scripts](#start-restart-and-stop-the-program-using-shell-scripts)
+
+
+
 ## Requirements
 - [NVIDIA Jetson AGX Orin](https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-orin/) with JetPack [installed](https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit)
 - Internet connection to pull necessary models
@@ -89,48 +103,32 @@ python3 RAG_n_RIVA.py
 
 This script handles both the Retrieval-Augmented Generation (RAG) process using the Ollama model and the speech services provided by NVIDIA Riva.
 
-## How to Start, Restart, and Stop the Program Using Shell Scripts
+## Start, Restart, and Stop the Program Using Shell Scripts
 
-Once you have successfully completed the project setup, you can start, restart, or stop the project using the provided shell scripts. Follow the instructions below for each operation.
+After successfully setting up the project, you can manage the application with simple shell scripts that automate the process of starting, restarting, and stopping the necessary components.
 
-### Starting the Project
+**Available Shell Scripts**
 
-To start the project, run the following command in your terminal:
++ **Starting the Project:** Run the following command to start the required servers and launch the Python program:
+
 ```bash
 bash ragnriva_start.sh
 ```
 
 This script will:
-
-1. Start the Ollama Server.
-2. Start the NVIDIA RIVA Server.
-3. Activate the Python virtual environment.
-4. Run the main Python script.
+  1. Open a new terminal to start the Ollama Server.
+  2. Open another terminal to start the NVIDIA Riva Server.
+  3. Open a third terminal to activate the virtual environment and run the Python program.
    
-### Restarting the Project
-
-To restart only the virtual environment and the Python script, run the following command:
++ **Restarting the Python Program:** If you only need to restart the virtual environment and the Python script (without restarting the servers), use:
 ```bash
 bash ragnriva_restart.sh
 ```
-This script will:
 
-1. Restart the Python virtual environment.
-2. Restart the main Python script.
-
-### Stopping the Project
-To stop all the running services and close the terminal sessions, run the following command:
++ **Stopping the Project:** To shut down the Ollama server, Riva server, the Python script, and close all related terminals, run:
 ```bash
 bash ragnriva_stop.sh
 ```
-This script will:
-
-1. Stop the Ollama Server.
-2. Stop the NVIDIA RIVA Server.
-3. Terminate the Python script.
-4. Shut down all open terminal windows related to the project.
-
-Make sure to have the required permissions to execute shell scripts and use these commands to manage the project efficiently.
 
 ## Troubleshooting and Common Issues
 
