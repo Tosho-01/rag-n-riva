@@ -18,6 +18,7 @@ The project uses three main components:
    2.3 [Running the Python Script](#3-running-the-python-script)
 
 3. [Start, Restart, and Stop the Program Using Shell Scripts](#start-restart-and-stop-the-program-using-shell-scripts)
+4. [Troubleshooting and Common Issues](#troubleshooting-and-common-issues)
 
 
 
