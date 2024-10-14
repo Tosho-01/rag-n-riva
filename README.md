@@ -1,6 +1,6 @@
 # Local LLM with RAG and Speech Functionality on NVIDIA Jetson Orin
 
-This repository contains all the necessary steps to set up a local language model (LLM) with Retrieval-Augmented Generation (RAG) and speech functionality on an NVIDIA Jetson AGX Orin. The project has been developed as part of a university project by Theodor Stetter at the [RPTU](https://www.rptu.de/).
+This repository contains all the necessary steps to set up a local large language model (LLM) with Retrieval-Augmented Generation (RAG) and speech functionality on an NVIDIA Jetson AGX Orin. The project has been developed as part of a university project by Theodor Stetter at the [RPTU](https://www.rptu.de/).
 
 The project uses three main components:
 1. The [**Ollama**](https://ollama.com/) container from the [Jetson Containers project](https://github.com/dusty-nv/jetson-containers) to run the LLM
