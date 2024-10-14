@@ -75,9 +75,7 @@ It is recommended to use a virtual environment to install the packages and run t
 
 1. Setup the virtual environment
 2. Install the necessary Python packages by running:
-```
-bash
-
+```bash
 pip install -r requirements.txt
 ```
 Note: Ensure you are in the correct directory that contains the requirements.txt file.
@@ -85,13 +83,54 @@ Note: Ensure you are in the correct directory that contains the requirements.txt
 #### b) Running the Script
 
 To start the system, run the main Python script as follows:
-```
-bash
-
+```bash
 python3 RAG_n_RIVA.py
 ```
 
 This script handles both the Retrieval-Augmented Generation (RAG) process using the Ollama model and the speech services provided by NVIDIA Riva.
+
+## How to Start, Restart, and Stop the Program Using Shell Scripts
+
+Once you have successfully completed the project setup, you can start, restart, or stop the project using the provided shell scripts. Follow the instructions below for each operation.
+
+### Starting the Project
+
+To start the project, run the following command in your terminal:
+```bash
+bash ragnriva_start.sh
+```
+
+This script will:
+
+1. Start the Ollama Server.
+2. Start the NVIDIA RIVA Server.
+3. Activate the Python virtual environment.
+4. Run the main Python script.
+   
+### Restarting the Project
+
+To restart only the virtual environment and the Python script, run the following command:
+```bash
+bash ragnriva_restart.sh
+```
+This script will:
+
+1. Restart the Python virtual environment.
+2. Restart the main Python script.
+
+### Stopping the Project
+To stop all the running services and close the terminal sessions, run the following command:
+```bash
+bash ragnriva_stop.sh
+```
+This script will:
+
+1. Stop the Ollama Server.
+2. Stop the NVIDIA RIVA Server.
+3. Terminate the Python script.
+4. Shut down all open terminal windows related to the project.
+
+Make sure to have the required permissions to execute shell scripts and use these commands to manage the project efficiently.
 
 ## Troubleshooting and Common Issues
 
