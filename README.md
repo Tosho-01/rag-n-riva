@@ -140,8 +140,6 @@ If you are experiencing issues with audio input/output (e.g., using microphones 
 ### Model Download Issues
 
 If model downloads fail or take too long, check your internet connection and available disk space. Some models, like llama3, are large, and the download may take some time.
-Future Improvements
-
 
 ### Additional Information
 
